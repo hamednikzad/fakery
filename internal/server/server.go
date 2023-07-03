@@ -1,16 +1,17 @@
 package server
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/hamednikzad/fakery/pkg/color"
+	"github.com/hamednikzad/fakery/pkg/mylog"
 	"log"
 	"os"
 )
 
 func registerControllers(e *gin.Engine) {
-	log.Println("POST on /data/input-a")
-	log.Println("POST on /data/input-b")
-	log.Printf("Red: %s %s None: %s %s", color.ColorBLU, "red string", color.ColorMAG, "colorless string")
+	mylog.Println("POST on /data/input-a", color.CYN)
+	mylog.Println("POST on /data/input-b", color.CYN)
 
 	routes := e.Group("/data")
 	routes.POST("/input-a", handler)
@@ -26,7 +27,7 @@ func Run(addr string) {
 		os.Exit(exitCode)
 	}()
 
-	log.Printf("Statring server on %s\n", addr)
+	mylog.Println(fmt.Sprintf("Starting server on %s", addr), color.YEL)
 
-	engine.Run(addr)
+	log.Fatal(engine.Run(addr))
 }
