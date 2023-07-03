@@ -1,0 +1,5 @@
+workers:
+    - id: "1"
+      remote-address: "http://localhost:5000/data/input-a"
+    - id: "2"
+      remote-address: "http://localhost:5000/data/input-b"

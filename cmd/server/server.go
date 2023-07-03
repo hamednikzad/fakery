@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	server.Run(":5000")
+	cfg := getConfig()
+
+	server.Run(cfg.Server.ListenAddress)
 
 	shutdown.Gracefully()
 }

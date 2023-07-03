@@ -9,9 +9,11 @@ import (
 	"os"
 )
 
-func registerControllers(e *gin.Engine) {
-	mylog.Println("POST on /data/input-a", color.CYN)
-	mylog.Println("POST on /data/input-b", color.CYN)
+func registerControllers(e *gin.Engine, addr string) {
+	addrA := fmt.Sprintf("%s/data/input-a", addr)
+	addrB := fmt.Sprintf("%s/data/input-b", addr)
+	mylog.Println("POST on "+addrA, color.CYN)
+	mylog.Println("POST on "+addrB, color.CYN)
 
 	routes := e.Group("/data")
 	routes.POST("/input-a", handler)
@@ -20,7 +22,7 @@ func registerControllers(e *gin.Engine) {
 
 func Run(addr string) {
 	engine := gin.Default()
-	registerControllers(engine)
+	registerControllers(engine, addr)
 
 	var exitCode int
 	defer func() {
