@@ -22,7 +22,7 @@
 **/.idea/**/modules.xml
 .idea/
 sync/
-
+build/
 
 
 # Binaries for programs and plugins

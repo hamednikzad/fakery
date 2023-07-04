@@ -16,9 +16,9 @@ type config struct {
 }
 
 func getConfig() config {
-	f, err := os.Open("config.yml")
+	f, err := os.Open("client.yml")
 	if err != nil {
-
+		log.Fatal(err)
 	}
 	defer f.Close()
 
@@ -26,7 +26,7 @@ func getConfig() config {
 	decoder := yaml.NewDecoder(f)
 	err = decoder.Decode(&cfg)
 	if err != nil {
-		log.Fatal("Error in reading config.yml ", err)
+		log.Fatal("Error in reading client.yml ", err)
 	}
 	return cfg
 }
