@@ -12,6 +12,7 @@ func handler(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer c.Request.Body.Close()
 
 	log.Printf("%d bytes received", len(jsonData))
 

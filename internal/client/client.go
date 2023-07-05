@@ -62,6 +62,7 @@ func (w *Worker) Run() {
 func (w *Worker) sendRequest(bArray []byte) {
 	bodyReader := bytes.NewReader(bArray)
 	req, err := http.NewRequest(http.MethodPost, w.Url, bodyReader)
+
 	if err != nil {
 		w.info(fmt.Sprintf("client: could not create request: %s", err))
 		return
@@ -74,6 +75,7 @@ func (w *Worker) sendRequest(bArray []byte) {
 		w.info(fmt.Sprintf("client: error making http request: %s", err))
 		return
 	}
+	defer res.Body.Close()
 
 	w.info(fmt.Sprintf("Rsponse:%s", res.Status))
 }

@@ -22,6 +22,7 @@ func registerControllers(e *gin.Engine, addr string) {
 
 func Run(addr string) {
 	engine := gin.Default()
+
 	registerControllers(engine, addr)
 
 	var exitCode int
