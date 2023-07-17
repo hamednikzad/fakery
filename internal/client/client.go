@@ -11,16 +11,24 @@ import (
 )
 
 type Worker struct {
-	Id   string
-	Url  string
-	rand *rand.Rand
+	Id          string
+	Url         string
+	rand        *rand.Rand
+	BytesMin    int
+	BytesMax    int
+	IntervalMax int
+	IntervalMin int
 }
 
-func NewWorker(id string, url string) *Worker {
+func NewWorker(id string, url string, bytesMin, bytesMax int, intervalMin, intervalMax int) *Worker {
 	return &Worker{
-		Id:   id,
-		Url:  url,
-		rand: rand.New(rand.NewSource(time.Now().UnixNano())),
+		Id:          id,
+		Url:         url,
+		rand:        rand.New(rand.NewSource(time.Now().UnixNano())),
+		BytesMin:    bytesMin,
+		BytesMax:    bytesMax,
+		IntervalMin: intervalMin,
+		IntervalMax: intervalMax,
 	}
 }
 
@@ -46,7 +54,7 @@ func (w *Worker) fatal(msg string) {
 
 func (w *Worker) Run() {
 	for {
-		buf := make([]byte, w.getRandomInt(40, 750))
+		buf := make([]byte, w.getRandomInt(w.BytesMin, w.BytesMax))
 		_, err := w.rand.Read(buf)
 		if err != nil {
 			w.fatal(fmt.Sprintf("error while generating random bytes: %s", err))
@@ -55,7 +63,7 @@ func (w *Worker) Run() {
 		}
 
 		w.sendRequest(buf)
-		w.sleep(10, 40)
+		w.sleep(w.IntervalMin, w.IntervalMax)
 	}
 }
 

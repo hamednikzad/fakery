@@ -7,8 +7,10 @@ import (
 )
 
 type worker struct {
-	Id            string `yaml:"id"`
-	RemoteAddress string `yaml:"remote-address"`
+	Id             string `yaml:"id"`
+	RemoteAddress  string `yaml:"remote-address"`
+	Bytes          string `yaml:"bytes"`
+	IntervalSecond string `yaml:"interval-second"`
 }
 
 type config struct {
